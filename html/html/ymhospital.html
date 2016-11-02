@@ -258,8 +258,8 @@
 			}
 			.main_bg .img_um{
           position:absolute;
-          left:210px;
-          top:2px;
+          right:200px;
+          top:3px;
       }
 			.main_bg .inter3{
 	        width:390px;
@@ -498,8 +498,16 @@
       }
     }
 
+		function getvl(name) {
+			var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");
+			if (reg.test(location.href)) return decodeURI(RegExp.$2.replace(/\+/g," "));
+			return "";
+		};
+		getvl('id')
+		var aa = getvl('id');
+    console.log(aa);
     ask({
-      url:'../../php/code/hospital.php',
+      url:'../../php/code/hospital_1.php?id='+aa,
     },function(obj) {
       console.log(obj);
       var oall = $('.oall');
@@ -838,7 +846,7 @@
 
 			// 服务项目
 			ask({
-				url:'../../php/code/hospital_goods.php?id='+obj[5].hospital_id,
+				url:'../../php/code/hospital_goods.php?id='+obj[0].hospital_id,
 			},function(obj){
 				console.log(obj);
 				var give1 = $('.give1');
