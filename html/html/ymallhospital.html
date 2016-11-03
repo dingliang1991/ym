@@ -270,18 +270,6 @@
 							marginLeft:'8px',
 						})
 						odiv.append(img_um)
-						// var starnum = $('<div>');
-						// starnum.text(obj[i].hospital_star);
-						// starnum.css({
-						// 	margin:'10px 0 7px',
-						// 	overflow:'hidden',
-						// 	lineHeight:'21px',
-						// 	color:'#999',
-						// })
-						// var star = $('<span>')
-						// star.addClass('star');
-						// starnum.append(star)
-						// odiv.append(starnum);
 						var honor = $("<span>")
 						honor.css({
 							lineHeight:'25px',
@@ -298,6 +286,44 @@
 						obo.addClass('pp');
 			      var pp =$('.pp');
 			      pp[i].innerHTML = obj[i].hospital_over;
+						var star = $('<div>');
+						star.css({
+							width:'100px',
+							overflow:'hidden',
+							lineHeight:'21px',
+							float:'right',
+							color:'#999',
+							height:'159px',
+							margin:'40px 160px 0 0',
+							fontSize:'14px',
+						})
+						bigtop.append(star);
+						var numstar = $('<p>');
+						if (parseInt(obj[i].hospital_star) == Number(obj[i].hospital_star)) {
+						   	numstar.text(obj[i].hospital_star+'.0')
+						}else {
+							numstar.text(obj[i].hospital_star)
+						}
+						var fen = $('<span>');
+						fen.css({
+							color: '#999',
+              lineHeight: '25px',
+						})
+						fen.text('分');
+						numstar.css({
+							fontSize:' 22px',
+							color:'#ff5566',
+							fontFamily:'arial',
+						})
+						star.append(numstar)
+						numstar.append(fen);
+						var xg = $('<p>');
+						xg.text('效 果：'+obj[i].hospital_star)
+						star.append(xg);
+						// var star = $('<span>')
+						// star.addClass('star');
+						// starnum.append(star)
+						// odiv.append(starnum);
 				 }
 			})
 

@@ -33,7 +33,9 @@
   font-family: "arial";
 }
 .goods_cost{
-  margin-left: 12px
+  margin-left: 12px;
+  text-decoration: line-through;
+  font-family: arial;
 }
 .goods{
   position: relative;

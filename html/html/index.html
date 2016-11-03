@@ -128,7 +128,7 @@
 						<a href="index.html" class="home_page" style="background:#e54c5c;">首页</a>
 						<a href="#" class="home_serve">找服务</a>
 						<a href="ymallhospital.html" class="home_hospital">找医院</a>
-						<a href="#" class="home_project">项目介绍</a>
+						<a href="class1.html" class="home_project">项目介绍</a>
 					</div>
 				</div>
 			</div>
@@ -237,17 +237,20 @@
 				}
 			}
 
-			// 首页侧边查看部分
-			// ask({
-			// 	url:'',
-			// },function(obj) {
-			//
-			// })
-
       // 热门项目
 			ask({
 			  url:'../../php/code/index.php',
 			},function(obj){
+				for (var j = 0; j < obj.length - 1; j++) {
+		    	for (var i = 0; i < obj.length - 1 - j; i++) {
+		           if (parseInt(obj[i].goods_buynum) < parseInt(obj[i+1].goods_buynum)) {
+								var huan = obj[i];
+								obj[i] = obj[i+1];
+								obj[i+1] = huan;
+		           }
+		        }
+		    }
+				console.log(obj);
 				 var hot = $('.hot_goods');
 				 var obj1 = [];
 				 for (var i = 0; i < 8; i++) {
@@ -259,20 +262,54 @@
 			ask({
 			  url:'../../php/code/index.php',
 			},function(obj){
+				for (var j = 0; j < obj.length - 1; j++) {
+		    	for (var i = 0; i < obj.length - 1 - j; i++) {
+		           if (parseInt(obj[i].goods_vip) > parseInt(obj[i+1].goods_vip)) {
+								var huan = obj[i];
+								obj[i] = obj[i+1];
+								obj[i+1] = huan;
+		           }
+		        }
+		    }
 				 var prefer = $('.prefer_goods');
 				 var obj1 = [];
 				 for (var i = 0; i < 4; i++) {
 				 	obj1.push(obj[i])
 				 }
          goods(obj1,prefer);
+				 var goods1 = $('.goods')
+				 var ami = goods1.slice(8)
+				 console.log(obj1[0].goods_vip);
+				 for (var i = 0; i < ami.length; i++) {
+				 	  var mi = $('<div>');
+						$(ami[i]).attr('index',i)
+						var zhe = parseInt(obj1[$(ami[i]).attr('index')].goods_vip)/parseInt(obj1[$(ami[i]).attr('index')].goods_cost)
+            var zhe1 = zhe*10;
+						mi.text(zhe1.toFixed(1)+'折')
+						mi.css({
+							width:'48px',
+							height:'24px',
+							background:'url(../img/tag-bg.png) no-repeat',
+							position:'absolute',
+							bottom:'15px',
+							right:'0',
+							color:'#fff',
+							textAlign:'center',
+							lineHeight:'24px',
+							fontSize:'14px',
+							fontFamily:'arial',
+						})
+						$(ami[i]).append(mi);
+				 }
 			})
 			// 最新上线
 			ask({
 			  url:'../../php/code/index.php',
 			},function(obj){
+				 obj.reverse();
 				 var new1 = $('.new_goods');
 				 var obj1 = [];
-				 for (var i = 0; i < 4; i++) {
+				 for (var i = 25; i < 29; i++) {
 				 	obj1.push(obj[i])
 				 }
          goods(obj1,new1);
